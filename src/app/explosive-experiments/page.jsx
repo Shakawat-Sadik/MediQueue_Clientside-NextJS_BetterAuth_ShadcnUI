@@ -2,10 +2,10 @@ import React from 'react';
 
 const ExplosiveExperimentsPage = async () => {
     try {
-        const result = await fetch(`${process.env.REMOTE_SERVER_URL}/doctors?limit=1000`);
-        // const data = await result.json();
+        const result = await fetch(`${process.env.REMOTE_SERVER_URL}/doctors`);
+        const data = await result.json();
         
-        console.log("Fetched doctors data:", result);
+        console.log("Fetched doctors data:", data.result);
     } catch (error) {
         console.error("Failed to fetch doctors:", error.message);
     }
