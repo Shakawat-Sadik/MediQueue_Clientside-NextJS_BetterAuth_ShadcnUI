@@ -10,7 +10,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { authClient } from "@/lib/auth-client";
 
-const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000";
+const API_URL = process.env.NODE_ENV === "production" ? process.env.REMOTE_SERVER_URL : process.env.SERVER_URL || "http://localhost:5000";
 
 const statusConfig = {
   available: {

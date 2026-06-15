@@ -15,6 +15,7 @@ export default function DoctorCard({ doctor, onViewDetails }) {
       {/* Image */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
         <Image
+          loading="eager"
           src={doctor.image}
           alt={doctor.name}
           fill
