@@ -1,5 +1,6 @@
 import AllDoctors from "@/components/doctors/AllDoctors";
 
-export default function AppointmentsPage() {
+export default function DoctorsPage() {
+
   return <AllDoctors />;
 }

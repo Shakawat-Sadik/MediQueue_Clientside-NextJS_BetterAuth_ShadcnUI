@@ -1,7 +1,7 @@
 import { Separator } from "@/components/ui/separator";
 
 export const metadata = {
-  title: "All Doctors — CareSync",
+  title: "All Doctors — MediQueue",
   description:
     "Browse all available doctors and book appointments with top-rated specialists across the UK. Search, filter, and sort to find the right doctor for your needs.",
   keywords: [
@@ -9,10 +9,10 @@ export const metadata = {
     "find doctor",
     "book consultation",
     "specialist",
-    "CareSync",
+    "MediQueue",
   ],
   openGraph: {
-    title: "All Doctors — CareSync",
+    title: "All Doctors — MediQueue",
     description:
       "Browse all available doctors and book appointments with top-rated specialists across the UK.",
   },

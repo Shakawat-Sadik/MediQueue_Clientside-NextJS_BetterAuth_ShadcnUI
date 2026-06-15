@@ -1,6 +1,6 @@
 "use server";
 
-const API_URL = process.env.API_BASE_URL || "http://localhost:5000";
+const API_URL = process.env.SERVER_URL || "http://localhost:5000";
 
 // ─────────────────────────────────────
 // Helper: Core fetch wrapper

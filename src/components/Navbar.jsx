@@ -12,7 +12,7 @@ import { ActivityIcon } from "./ui/activity";
 
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "All Appointments", href: "/appointments" },
+  { name: "Meet The Docs", href: "/doctors" },
   { name: "Dashboard", href: "/dashboard" },
 ];
 
