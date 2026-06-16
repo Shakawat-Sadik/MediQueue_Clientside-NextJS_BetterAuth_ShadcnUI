@@ -127,7 +127,7 @@ export default function Navbar() {
                   onClick={() => setProfileMenuOpen((p) => !p)}
                   className="flex items-center gap-2 rounded-full bg-primary text-primary-foreground pl-3 pr-1.5 py-1.5 hover:opacity-90 transition-opacity cursor-pointer"
                 >
-                  <span className="text-sm font-semibold max-w-[120px] truncate hidden sm:block">
+                  <span className="text-sm font-semibold max-w-40 truncate hidden sm:block">
                     {user?.name || "Profile"}
                   </span>
                   <div className="relative h-8 w-8 rounded-full bg-primary-foreground/20 flex items-center justify-center overflow-hidden">
@@ -242,7 +242,7 @@ export default function Navbar() {
               {isAuthenticated ? (
                 <div className="space-y-2">
                   <div className="flex items-center gap-3 p-3 rounded-xl bg-accent">
-                    <div className="relative h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden flex-shrink-0">
+                    <div className="relative h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden shrink-0">
                       {user?.image ? (
                         <Image
                           src={user.image}

@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { authClient } from "@/lib/auth-client";
+import { getDoctors } from "@/lib/action/action";
 
 const API_URL = process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_REMOTE_SERVER_URL : process.env.SERVER_URL || "http://localhost:5000";
 
@@ -42,23 +43,22 @@ export default function TopDoctors() {
     const fetchTopDoctors = async () => {
       try {
         setLoading(true);
-        const res = await fetch(
-          `${API_URL}/doctors?sort=rating&order=desc&limit=3`
-        );
+        const res = await getDoctors({
+          sort: "rating",
+          order: "desc",
+          limit: 3
+        });
 
-        if (!res.ok) {
-          throw new Error(`Failed to fetch: ${res.status}`);
+        // const data = await res.json();
+        if (!res.success) {
+          throw new Error(res.message || "Failed to load doctors");
         }
-
-        const data = await res.json();
+        console.log("API Response for Top Doctors:", res);
 
         // ✅ Check if backend says success
-        if (!data.success) {
-          throw new Error(data.message || "Failed to load doctors");
-        }
 
-        // ✅ Extract the actual array from data.result
-        setDoctors(data.result);
+        // ✅ Extract the actual array from data.resul
+        setDoctors(res.result || []);
       } catch (err) {
         setError(err.message);
         console.error("Error fetching top doctors:", err);
