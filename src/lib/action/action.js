@@ -1,6 +1,6 @@
 "use server";
 
-const API_URL = process.env.NODE_ENV === "production" ? process.env.REMOTE_SERVER_URL : process.env.SERVER_URL || "http://localhost:5000";
+const API_URL = process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_REMOTE_SERVER_URL : process.env.SERVER_URL || "http://localhost:5000";
 
 // ─────────────────────────────────────
 // Helper: Core fetch wrapper
