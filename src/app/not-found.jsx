@@ -49,7 +49,7 @@ export default function NotFound() {
  
         {/* Footer */}
         <p className="mt-10 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-          HealZen • Your trusted healthcare companion
+          MediQueue • Your trusted healthcare companion
         </p>
       </div>
     </section>
