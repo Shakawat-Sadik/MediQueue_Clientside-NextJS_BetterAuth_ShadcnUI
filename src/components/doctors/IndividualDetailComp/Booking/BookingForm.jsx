@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/card";
 import { authClient } from "@/lib/auth-client";
 import { createAppointment } from "@/lib/action/action";
+import { eliteDateFormat } from "@/lib/utils";
 
 export default function BookingForm({ doctor }) {
   const router = useRouter();
@@ -35,31 +36,45 @@ export default function BookingForm({ doctor }) {
     e.preventDefault();
     setSubmitting(true);
     setError(null);
+    try {
+      const formData = new FormData(e.currentTarget);
+      const appointmentData = {
+        doctorId: doctor._id || doctor.id,
+        doctorName: doctor.name,
+        doctorSpecialty: doctor.specialty,
+        doctorImage: doctor.image,
+        doctorFee: doctor.fee,
+        hospital: doctor.hospital,
+        userEmail: user.email, // Server action will securely handle this later
+        patientName: formData.get("patientName"),
+        gender: formData.get("gender"),
+        phone: formData.get("phone"),
+        appointmentDate: formData.get("appointmentDate"),
+        appointmentTime: formData.get("appointmentTime"),
+        notes: formData.get("notes") || "",
+      };
 
-    const formData = new FormData(e.currentTarget);
-    const appointmentData = {
-      doctorId: doctor._id || doctor.id,
-      doctorName: doctor.name,
-      doctorSpecialty: doctor.specialty,
-      doctorImage: doctor.image,
-      doctorFee: doctor.fee,
-      hospital: doctor.hospital,
-      userEmail: user.email, // Server action will securely handle this later
-      patientName: formData.get("patientName"),
-      gender: formData.get("gender"),
-      phone: formData.get("phone"),
-      appointmentDate: formData.get("appointmentDate"),
-      appointmentTime: formData.get("appointmentTime"),
-      notes: formData.get("notes") || "",
-    };
+      const result = await createAppointment(appointmentData);
 
-    const result = await createAppointment(appointmentData);
-
-    if (result.success) {
-      // Redirect to dashboard to see the new booking
-      router.push("/dashboard");
-    } else {
-      setError(result.message || "Failed to book appointment. Please try again.");
+      if (result.success) {
+        // Redirect to dashboard to see the new booking
+        router.push("/dashboard");
+        toast.success("Appointment booked successfully!", {
+          description: `Your appointment with Dr. ${doctor.name} is confirmed for ${eliteDateFormat(appointmentData.appointmentDate)} at ${appointmentData.appointmentTime}.`,
+          icon: <CalendarPlus className="h-4 w-4" />,
+        });
+      } else {
+        setError(result.message || "Failed to book appointment.");
+        toast.error("Booking failed", {
+          description: result.message || "Please try again.",
+        });
+      }
+    } catch (err) {
+      setError(err.message || "An unexpected error occurred.");
+      toast.error("Booking failed", {
+        description: err.message || "Please try again.",
+      });
+    } finally {
       setSubmitting(false);
     }
   };
@@ -81,9 +96,11 @@ export default function BookingForm({ doctor }) {
 
   // Extract time slots from doctor availability
   const timeSlots = doctor.availability?.flatMap((slot) => {
-    if (slot.includes("09:00") || slot.includes("08:00")) return ["09:00 AM", "10:00 AM", "11:00 AM"];
+    if (slot.includes("09:00") || slot.includes("08:00"))
+      return ["09:00 AM", "10:00 AM", "11:00 AM"];
     if (slot.includes("10:00")) return ["10:00 AM", "11:00 AM", "12:00 PM"];
-    if (slot.includes("04:00") || slot.includes("05:00")) return ["04:00 PM", "05:00 PM", "06:00 PM"];
+    if (slot.includes("04:00") || slot.includes("05:00"))
+      return ["04:00 PM", "05:00 PM", "06:00 PM"];
     return ["10:00 AM", "02:00 PM"]; // Fallback
   }) || ["10:00 AM"];
 
@@ -105,8 +122,12 @@ export default function BookingForm({ doctor }) {
           </CardTitle>
           <CardDescription className="text-muted-foreground pt-2">
             Fill in your details to confirm your appointment with{" "}
-            <span className="font-semibold text-foreground">{doctor.name}</span> at{" "}
-            <span className="font-semibold text-foreground">{doctor.hospital}</span>.
+            <span className="font-semibold text-foreground">{doctor.name}</span>{" "}
+            at{" "}
+            <span className="font-semibold text-foreground">
+              {doctor.hospital}
+            </span>
+            .
           </CardDescription>
         </CardHeader>
         <CardContent>

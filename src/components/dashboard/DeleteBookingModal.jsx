@@ -20,20 +20,27 @@ const DeleteBookingModal = ({ booking, onClose, onSuccess }) => {
 
   const handleDelete = async () => {
     setSubmitting(true);
-    const res = await deleteAppointment(booking._id);
-    
-    if (res.success) {
-      // Using your custom Sonner configuration
-      toast.success("Appointment deleted successfully!", sonnerFunctionality());
-      
-      onSuccess(booking._id); // Removes it from UI instantly
-      onClose(); // Close the modal after success
-    } else {
-      toast.error("Failed to delete appointment.", {
-        description: res.message,
+    try {
+      const res = await deleteAppointment(booking._id);
+
+      if (res.success) {
+        toast.success("Appointment deleted successfully!", {
+          description: `Your appointment with ${booking.doctorName} on ${formatDate(booking.appointmentDate)} was cancelled.`,
+        });
+        onSuccess(booking._id);
+        onClose();
+      } else {
+        toast.error("Failed to delete appointment.", {
+          description: res.message || "Please try again.",
+        });
+      }
+    } catch (err) {
+      toast.error("An unexpected error occurred", {
+        description: err.message || "Please refresh and try again.",
       });
+    } finally {
+      setSubmitting(false); // ✅ ALWAYS runs, even on errors
     }
-    setSubmitting(false);
   };
 
   return (
@@ -46,25 +53,38 @@ const DeleteBookingModal = ({ booking, onClose, onSuccess }) => {
           </DialogTitle>
           <DialogDescription>
             Are you sure you want to cancel your appointment with{" "}
-            <span className="font-semibold text-foreground">{booking.doctorName}</span>{" "}
+            <span className="font-semibold text-foreground">
+              {booking.doctorName}
+            </span>{" "}
             on{" "}
-            <span className="font-semibold text-foreground">{formatDate(booking.appointmentDate)}</span>? 
-            This action cannot be undone.
+            <span className="font-semibold text-foreground">
+              {formatDate(booking.appointmentDate)}
+            </span>
+            ? This action cannot be undone.
           </DialogDescription>
         </DialogHeader>
 
         <DialogFooter className="gap-2">
           <DialogClose asChild>
-            <Button type="button" variant="ghost">Cancel</Button>
+            <Button type="button" variant="ghost">
+              Cancel
+            </Button>
           </DialogClose>
-          <Button type="button" variant="destructive" onClick={handleDelete} disabled={submitting}>
-            {submitting ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
+          <Button
+            type="button"
+            variant="destructive"
+            onClick={handleDelete}
+            disabled={submitting}
+          >
+            {submitting ? (
+              <Loader2 className="h-4 w-4 animate-spin mr-2" />
+            ) : null}
             Yes, Delete
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   );
-}
+};
 
 export default DeleteBookingModal;
