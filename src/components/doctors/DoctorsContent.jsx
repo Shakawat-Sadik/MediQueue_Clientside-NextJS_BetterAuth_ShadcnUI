@@ -38,7 +38,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { authClient } from "@/lib/auth-client";
-import { specialtyOptions } from "@/lib/provider"; // Removed sortOptions, we use sortGroups below
+import { specialtyOptions } from "@/lib/badgeProvider"; // Removed sortOptions, we use sortGroups below
 import DoctorCard from "@/components/doctors/DoctorCard";
 import DoctorCardSkeleton from "@/components/doctors/Doctor-X-ray";
 import { getDoctors } from "@/lib/action/action";
@@ -301,7 +301,7 @@ export default function AllDoctorsContent() {
               value={specialtyFilter}
               onValueChange={setSpecialtyFilter}
             >
-              <SelectTrigger className="w-full sm:w-[220px] h-11 bg-card border-border">
+              <SelectTrigger className="w-full sm:w-55 h-11 bg-card border-border">
                 <SelectValue placeholder="All Specialties" />
               </SelectTrigger>
               <SelectContent>

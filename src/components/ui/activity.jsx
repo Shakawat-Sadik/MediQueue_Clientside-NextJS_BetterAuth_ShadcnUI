@@ -24,6 +24,16 @@ const VARIANTS = {
       opacity: { duration: 0.1 },
     },
   },
+  // animate: {
+  //   opacity: [0, 1],
+  //   pathLength: [1, 0],
+  //   pathOffset: [0, 1],
+  //   transition: {
+  //     duration: 0.6,
+  //     ease: "linear",
+  //     opacity: { duration: 0.1 },
+  //   },
+  // },
 };
 
 const ActivityIcon = forwardRef(({ onMouseEnter, onMouseLeave, className, size = 28, ...props }, ref) => {

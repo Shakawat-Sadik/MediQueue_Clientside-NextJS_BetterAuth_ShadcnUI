@@ -11,7 +11,7 @@ export async function generateMetadata({ params }) {
 
   if (!data.success || !data.result) {
     return {
-      title: "Doctor Not Found | CareSync",
+      title: "Doctor Not Found | MediQueue",
       description: "The doctor profile you are looking for could not be found.",
     };
   }
@@ -19,10 +19,10 @@ export async function generateMetadata({ params }) {
   const doctor = data.result;
 
   return {
-    title: `${doctor.name} - ${doctor.specialty} | CareSync`,
+    title: `${doctor.name} - ${doctor.specialty} | MediQueue`,
     description: `Book an appointment with ${doctor.name}, a board-certified specialist in ${doctor.specialty} with ${doctor.experience} experience at ${doctor.hospital}.`,
     openGraph: {
-      title: `${doctor.name} - ${doctor.specialty} | CareSync`,
+      title: `${doctor.name} - ${doctor.specialty} | MediQueue`,
       description: `Book an appointment with ${doctor.name}, a board-certified specialist in ${doctor.specialty}.`,
       images: [doctor.image],
     },

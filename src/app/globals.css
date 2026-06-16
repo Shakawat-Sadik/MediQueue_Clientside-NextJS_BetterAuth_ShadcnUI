@@ -45,7 +45,10 @@
   --radius-xl: calc(var(--radius) * 1.4);
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-4xl: calc(var(--radius) * 2.6);  
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse-slow 3s infinite;
+  --animate-loading-bar: loading-bar 1.5s ease-in-out infinite;
 }
 
 /* ============================================
@@ -63,7 +66,7 @@
   --popover-foreground: oklch(0.208 0.042 265.755);
   
   /* Primary: Teal 600 (Strong, accessible, distinct) */
-  --primary: oklch(0.6 0.118 184.704);
+  --primary: rgb(0, 150, 137); /*rgba(0, 150, 137, 0.6)*/
   --primary-foreground: oklch(0.984 0.014 180.72); /* Teal 50 */
   
   /* Secondary: Slate 100 (Subtle cool gray containers) */
@@ -87,7 +90,7 @@
   --ring: oklch(0.6 0.118 184.704); /* Teal 600 for focus rings */
   
   /* Charts: Teal gradient */
-  --chart-1: oklch(0.855 0.108 176.8);  /* Teal 300 */
+  --chart-1: rgb(121, 231, 206);  /* Teal 300 */
   --chart-2: oklch(0.704 0.14 182.503);  /* Teal 500 */
   --chart-3: oklch(0.6 0.118 184.704);   /* Teal 600 */
   --chart-4: oklch(0.511 0.096 186.391); /* Teal 700 */

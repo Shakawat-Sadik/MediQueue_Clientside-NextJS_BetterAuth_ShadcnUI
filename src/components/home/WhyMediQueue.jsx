@@ -1,7 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import Link from "next/link";
 import {
   Clock,
   Award,
@@ -11,7 +8,6 @@ import {
   HeartPulse,
   TrendingUp,
   CheckCircle2,
-  ArrowRight,
 } from "lucide-react";
 
 const advantages = [
@@ -47,8 +43,8 @@ export default function WhyMediQueue() {
   return (
     <section className="py-16 sm:py-24 bg-background transition-colors duration-300 relative overflow-hidden">
       {/* Decorative background glows */}
-      <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute -bottom-40 -left-40 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute -top-40 -right-40 w-125 h-125 bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute -bottom-40 -left-40 w-100 h-100 bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 items-center">
@@ -114,15 +110,6 @@ export default function WhyMediQueue() {
                 );
               })}
             </div>
-
-            {/* Learn More Link */}
-            <Link
-              href="/appointments"
-              className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline underline-offset-4 mt-2 w-fit"
-            >
-              Explore All Features
-              <ArrowRight className="h-4 w-4" />
-            </Link>
           </div>
 
           {/* ── Right Side: Image + Floating Badges ── */}
@@ -130,7 +117,7 @@ export default function WhyMediQueue() {
             {/* Decorative glow behind image */}
             <div className="absolute -inset-4 bg-primary/10 rounded-3xl blur-2xl opacity-50 pointer-events-none" />
 
-            <div className="relative h-[380px] sm:h-[460px] rounded-2xl overflow-hidden shadow-2xl border border-border">
+            <div className="relative h-95 sm:h-115 rounded-2xl overflow-hidden shadow-2xl border border-border">
               <Image
                 src="https://res.cloudinary.com/sadik-store/image/upload/v1781192446/Hero_photo_2_tjn6pf.jpg"
                 alt="Medical consultation at MediQueue"
@@ -140,11 +127,11 @@ export default function WhyMediQueue() {
               />
 
               {/* Gradient overlay at bottom for badge readability */}
-              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/40 to-transparent pointer-events-none" />
             </div>
 
             {/* Floating Badge 1 — Vitals / Active Monitoring */}
-            <div className="absolute bottom-6 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-[280px] backdrop-blur-xl bg-card/80 border border-border p-4 rounded-xl shadow-lg flex items-center gap-3.5 animate-[float_3s_ease-in-out_infinite]">
+            <div className="absolute bottom-6 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-70 backdrop-blur-xl bg-card/80 border border-border p-4 rounded-xl shadow-lg flex items-center gap-3.5 animate-[float_3s_ease-in-out_infinite]">
               <div className="w-11 h-11 rounded-xl bg-primary flex items-center justify-center shrink-0 shadow-md">
                 <Activity className="w-5 h-5 text-primary-foreground animate-pulse" />
               </div>

@@ -5,7 +5,7 @@ import { Star, ArrowRight, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { statusConfig } from "@/lib/provider";
+import { statusConfig } from "@/lib/badgeProvider";
 
 export default function DoctorCard({ doctor, onViewDetails }) {
   const status = statusConfig[doctor.availabilityStatus];

@@ -108,7 +108,6 @@ export default function Navbar() {
 
           {/* ── Desktop Right Actions ── */}
           <div className="hidden md:flex items-center gap-2">
-            {/* Theme Toggle */}
             <Button
               onClick={toggleTheme}
               className={`p-2.5 rounded-xl border border-border bg-card text-muted-foreground hover:text-primary-foreground hover:border-primary/40 transition-all duration-200 cursor-pointer`}

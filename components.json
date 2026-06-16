@@ -23,6 +23,8 @@
   },
   "registries": {
     "@lucide-animated": "https://lucide-animated.com/r/{name}.json",
-    "@blocks-so": "https://blocks.so/r/{name}.json"
+    "@blocks-so": "https://blocks.so/r/{name}.json",
+    "@kokonutui": "https://kokonutui.com/r/{name}.json",
+    "@kibo-ui": "https://www.kibo-ui.com/r/{name}.json"
   }
 }

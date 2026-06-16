@@ -27,7 +27,13 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { authClient } from "@/lib/auth-client";
-import { statusConfig } from "@/lib/provider";
+import { statusConfig } from "@/lib/badgeProvider";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Info } from "lucide-react";
 
 export default function DoctorDetails({ doctor }) {
   const router = useRouter();
@@ -45,14 +51,13 @@ export default function DoctorDetails({ doctor }) {
   if (!doctor) {
     return (
       <section className="pt-24 pb-16 min-h-screen bg-background flex items-center justify-center">
-        <p className="text-destructive font-semibold">
-          Doctor data is unavailable.
-        </p>
+        <p className="text-destructive font-semibold">Doctor is unavailable.</p>
       </section>
     );
   }
 
   const status = statusConfig[doctor.availabilityStatus];
+  console.log(status);
 
   return (
     <section className="pt-24 pb-16 min-h-screen bg-background">
@@ -73,6 +78,7 @@ export default function DoctorDetails({ doctor }) {
             {/* Image Section */}
             <div className="relative h-72 md:h-auto overflow-hidden bg-muted">
               <Image
+                loading="eager"
                 src={doctor.image}
                 alt={doctor.name}
                 fill
@@ -81,14 +87,6 @@ export default function DoctorDetails({ doctor }) {
                 sizes="(max-width: 768px) 100vw, 33vw"
                 priority
               />
-              {/* Availability Badge on Image */}
-              {status && (
-                <Badge
-                  className={`absolute top-4 left-4 text-xs ${status.className}`}
-                >
-                  {status.label}
-                </Badge>
-              )}
             </div>
 
             {/* Content Section */}
@@ -123,14 +121,24 @@ export default function DoctorDetails({ doctor }) {
                     / session
                   </span>
                 </div>
+              <Tooltip>
+                <TooltipContent>
+                  {
+                    status && status.label
+                  }
+                </TooltipContent>
+                <TooltipTrigger>
                 <Button
                   size="lg"
                   className="group/btn w-full sm:w-auto"
                   onClick={handleBookAppointment}
+                  disabled={doctor.availabilityStatus === "fully_booked"}
                 >
                   <CalendarPlus className="mr-2 h-5 w-5" />
                   Book Appointment
                 </Button>
+                </TooltipTrigger>
+              </Tooltip>
               </div>
             </div>
           </div>
@@ -210,12 +218,12 @@ export default function DoctorDetails({ doctor }) {
             <CardContent className="space-y-4">
               {status && (
                 <div className="flex items-center gap-3">
+                  <span className="text-sm text-muted-foreground">
+                    Current Status :
+                  </span>
                   <Badge className={`${status.className} text-xs`}>
                     {status.label}
                   </Badge>
-                  <span className="text-sm text-muted-foreground">
-                    Current Status
-                  </span>
                 </div>
               )}
               <Separator />
@@ -242,13 +250,29 @@ export default function DoctorDetails({ doctor }) {
               </div>
             </CardContent>
             <CardFooter className="pt-0 px-6 pb-6 md:hidden">
-              <Button
-                className="w-full group/btn"
-                onClick={handleBookAppointment}
-              >
-                <CalendarPlus className="mr-2 h-5 w-5" />
-                Book Appointment
-              </Button>
+              <Tooltip>
+                <TooltipContent>
+                  {status && (
+                    <div className="flex items-center gap-3">
+                      <span className="text-sm text-muted-foreground">
+                        Current Status :
+                      </span>
+                      <Badge className={`${status.className} text-xs`}>
+                        {status.label}
+                      </Badge>
+                    </div>
+                  )}
+                </TooltipContent>
+                <TooltipTrigger>
+                  <Button
+                    className="w-full group/btn"
+                    onClick={handleBookAppointment}
+                  >
+                    <CalendarPlus className="mr-2 h-5 w-5" />
+                    Book Appointment
+                  </Button>
+                </TooltipTrigger>
+              </Tooltip>
             </CardFooter>
           </Card>
         </div>
@@ -284,12 +308,14 @@ export default function DoctorDetails({ doctor }) {
                         </p>
                         <div className="flex items-center gap-2">
                           <div className="flex">
-                            {Array.from({ length: review.rating }).map((_, i) => (
-                              <Star
-                                key={i}
-                                className="h-3 w-3 fill-amber-400 text-amber-400"
-                              />
-                            ))}
+                            {Array.from({ length: review.rating }).map(
+                              (_, i) => (
+                                <Star
+                                  key={i}
+                                  className="h-3 w-3 fill-amber-400 text-amber-400"
+                                />
+                              ),
+                            )}
                           </div>
                           <span className="text-xs text-muted-foreground">
                             {new Date(review.date).toLocaleDateString("en-US", {
