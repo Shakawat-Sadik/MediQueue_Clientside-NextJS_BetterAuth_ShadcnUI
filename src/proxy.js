@@ -10,12 +10,12 @@ export async function proxy(request) {
 
   if (!session) {
     const pathname = request.nextUrl.pathname;
-    const redirectUrl = new URL("/login", request.url);
+    const redirectUrl = new URL("/auth/login", request.url);
     redirectUrl.searchParams.set("redirect", pathname);
     return NextResponse.redirect(redirectUrl);
   }
 }
 
 export const config = {
-  matcher: ["/dashboard", "/appointments/:path"],
+  matcher: ["/dashboard", "/book/:slug"],
 };
