@@ -1,4 +1,5 @@
 "use server";
+import { getAuthHeaders } from "./integra";
 
 const API_URL =
   process.env.NODE_ENV === "production"
@@ -8,26 +9,34 @@ const API_URL =
 // Helper: Core fetch wrapper
 // ─────────────────────────────────────
 async function fetchAPI(endpoint, options = {}) {
-  
   const protectedEndpoints = ["/appointments", "/appointments/", "/reviews"];
 
   const needsAuth = protectedEndpoints.some((route) =>
     endpoint.startsWith(route),
   );
 
+  const headers = {
+    "Content-Type": "application/json",
+    ...options.headers,
+  };
+
+  if (needsAuth) {
+    const token = await getAuthHeaders();
+    console.log("Token in fetchAPI:", token); // Debug log to verify token presence
+
+    if (!token) {
+      return { success: false, message: "Not authenticated", result: null };
+    }
+    
+    headers.authorization = `Bearer ${token}`;
+  }
+
   try {
     const res = await fetch(`${API_URL}${endpoint}`, {
       ...options,
-      headers: {
-        "Content-Type": "application/json",
-        ...options.headers,
-      },
+      headers,
     });
-    
-    if(needsAuth) {
-      headers.authorization = "logged in";
-    };
-    
+
     const data = await res.json();
 
     if (!res.ok || !data.success) {

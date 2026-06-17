@@ -21,7 +21,6 @@ const BookingForm = ({ doctor }) => {
   const router = useRouter();
   const { data: session } = authClient.useSession();
   const user = session?.user;
-  console.log(user);
 
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
@@ -74,8 +73,8 @@ const BookingForm = ({ doctor }) => {
     if (slot.includes("09:00")) return ["09:00 AM", "10:00 AM", "11:00 AM"];
     if (slot.includes("10:00")) return ["10:00 AM", "11:00 AM", "12:00 PM"];
     if (slot.includes("04:00") || slot.includes("05:00")) return ["04:00 PM", "05:00 PM", "06:00 PM"];
-    return ["10:00 AM", "02:00 PM"];
-  }) || ["10:00 AM"];
+    return ["07:00 PM", "08:00 PM"];
+  }) || ["9:00 PM"];
 
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -139,8 +138,8 @@ const BookingForm = ({ doctor }) => {
                     <SelectValue placeholder="Select date" />
                   </SelectTrigger>
                   <SelectContent>
-                    {dates.map((date) => (
-                      <SelectItem key={date.value} value={date.value}>
+                    {dates.map((date, index) => (
+                      <SelectItem key={index+date.value} value={date.value}>
                         {date.label}
                       </SelectItem>
                     ))}
@@ -154,8 +153,8 @@ const BookingForm = ({ doctor }) => {
                     <SelectValue placeholder="Select time slot" />
                   </SelectTrigger>
                   <SelectContent>
-                    {timeSlots.map((time) => (
-                      <SelectItem key={time} value={time}>{time}</SelectItem>
+                    {timeSlots.map((time, index) => (
+                      <SelectItem key={index+time} value={time}>{time}</SelectItem>
                     ))}
                   </SelectContent>
                 </Select>

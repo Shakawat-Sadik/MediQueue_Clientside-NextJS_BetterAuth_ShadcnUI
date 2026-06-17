@@ -72,10 +72,10 @@ const MyBookings = () => {
         <CalendarX className="h-16 w-16 text-muted-foreground/30" />
         <h3 className="text-lg font-bold text-foreground">No Bookings Yet</h3>
         <p className="text-muted-foreground text-sm max-w-sm">
-          You haven't booked any appointments yet. Find your doctor and book
+          You haven&apos;t booked any appointments yet. Find your doctor and book
           your first session.
         </p>
-        <Link href="/appointments">
+        <Link href="/doctors">
           <Button className="mt-2">Browse Doctors</Button>
         </Link>
       </div>
