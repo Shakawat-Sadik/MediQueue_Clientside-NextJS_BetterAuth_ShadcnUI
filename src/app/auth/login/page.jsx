@@ -17,6 +17,8 @@ export default function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") || "/";
+  console.log("What is the search params?", searchParams.toString());
+  console.log("Redirect after login:", redirect);
 
   const [loading, setLoading] = useState(false);
   const [socialLoading, setSocialLoading] = useState(false);

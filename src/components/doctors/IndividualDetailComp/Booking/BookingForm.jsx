@@ -59,8 +59,8 @@ export default function BookingForm({ doctor }) {
       if (result.success) {
         // Redirect to dashboard to see the new booking
         router.push("/dashboard");
-        toast.success("Appointment booked successfully!", {
-          description: `Your appointment with Dr. ${doctor.name} is confirmed for ${eliteDateFormat(appointmentData.appointmentDate)} at ${appointmentData.appointmentTime}.`,
+        toast.success(`Appointment booked with Dr. ${doctor.name}`, {
+          description: `Confirmed for ${eliteDateFormat(appointmentData.appointmentDate)} at ${appointmentData.appointmentTime}.`,
           icon: <CalendarPlus className="h-4 w-4" />,
         });
       } else {

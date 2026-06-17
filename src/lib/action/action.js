@@ -1,7 +1,9 @@
 "use server";
 
-const API_URL = process.env.NODE_ENV === "production" ? process.env.REMOTE_SERVER_URL : process.env.SERVER_URL || "http://localhost:5000";
-
+const API_URL =
+  process.env.NODE_ENV === "production"
+    ? process.env.REMOTE_SERVER_URL
+    : process.env.SERVER_URL || "http://localhost:5000";
 // ─────────────────────────────────────
 // Helper: Core fetch wrapper
 // ─────────────────────────────────────
@@ -9,6 +11,7 @@ async function fetchAPI(endpoint, options = {}) {
   try {
     const res = await fetch(`${API_URL}${endpoint}`, {
       ...options,
+      cache: "no-store",
       headers: {
         "Content-Type": "application/json",
         ...options.headers,
@@ -27,7 +30,10 @@ async function fetchAPI(endpoint, options = {}) {
 
     return data;
   } catch (error) {
-    console.error(`API Error [${endpoint}]:`, error);
+    console.error("API Error:", error);
+    console.error("Message:", error.message);
+    console.error("Cause:", error.cause);
+    console.error("Stack:", error.stack);
     return {
       success: false,
       message: error.message || "Network error. Is the server running?",
@@ -53,6 +59,7 @@ export async function getDoctors(query = {}) {
   if (query.limit) params.set("limit", String(query.limit));
 
   const queryString = params.toString();
+  console.log("Query String for getDoctors:", queryString); // Debugging line
   const endpoint = `/doctors${queryString ? `?${queryString}` : ""}`;
 
   return await fetchAPI(endpoint);

@@ -9,6 +9,7 @@ import { Sun, Moon, Menu, X, LogOut, User } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import { Button } from "./ui/button";
 import { ActivityIcon } from "./ui/activity";
+import ThemeSwitch from "./theme/ThemeSwitch";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -20,6 +21,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const { data: session } = authClient.useSession();
 
   const user = session?.user;
@@ -53,9 +55,7 @@ export default function Navbar() {
     setMobileMenuOpen(false);
     setProfileMenuOpen(false);
   }, [pathname]);
-
-  const toggleTheme = () =>
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+  
 
   const handleSignOut = async () => {
     await authClient.signOut();
@@ -108,17 +108,7 @@ export default function Navbar() {
 
           {/* ── Desktop Right Actions ── */}
           <div className="hidden md:flex items-center gap-2">
-            <Button
-              onClick={toggleTheme}
-              className={`p-2.5 rounded-xl border border-border bg-card text-muted-foreground hover:text-primary-foreground hover:border-primary/40 transition-all duration-200 cursor-pointer`}
-              aria-label="Toggle theme"
-            >
-              {resolvedTheme === "dark" ? (
-                <Sun className="h-4 w-4" />
-              ) : (
-                <Moon className="h-4 w-4" />
-              )}
-            </Button>
+            <ThemeSwitch /> 
 
             {isAuthenticated ? (
               /* ── Profile Dropdown ── */
@@ -189,7 +179,8 @@ export default function Navbar() {
 
           {/* ── Mobile Controls ── */}
           <div className="flex items-center gap-2 md:hidden">
-            <Button
+            <ThemeSwitch />
+            {/* <Button
               onClick={toggleTheme}
               className="p-2 rounded-xl text-muted-foreground hover:bg-accent transition-colors cursor-pointer"
               aria-label="Toggle theme"
@@ -199,7 +190,7 @@ export default function Navbar() {
               ) : (
                 <Moon className="h-5 w-5" />
               )}
-            </Button>
+            </Button> */}
             <Button
               onClick={() => setMobileMenuOpen((p) => !p)}
               className="p-2 rounded-xl text-muted-foreground hover:bg-accent transition-colors cursor-pointer"

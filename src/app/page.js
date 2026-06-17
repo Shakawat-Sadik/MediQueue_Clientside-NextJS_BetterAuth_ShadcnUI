@@ -5,6 +5,13 @@ import DepHighlights from "@/components/home/DepHighlights";
 import Stats from "@/components/home/Stats";
 import Reviews from "@/components/home/Reviews";
 import TopDoctors from "@/components/home/TopDoctors";
+import { getDoctors } from "@/lib/action/action";
+
+const res = await getDoctors({
+  sort: "rating",
+  order: "desc",
+  limit: 3,
+});
 
 export default function Home() {
   return (
@@ -16,7 +23,7 @@ export default function Home() {
       {/* Why MediQueue */}
       <WhyMediQueue />
       {/* Top rated Doctor's */}
-      <TopDoctors />
+      <TopDoctors res={res} />
       {/* Department Highlights */}
       <DepHighlights />
       {/* Testimonial */}

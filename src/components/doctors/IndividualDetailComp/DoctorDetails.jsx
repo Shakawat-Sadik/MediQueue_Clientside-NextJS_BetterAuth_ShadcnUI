@@ -121,24 +121,28 @@ export default function DoctorDetails({ doctor }) {
                     / session
                   </span>
                 </div>
-              <Tooltip>
-                <TooltipContent>
-                  {
-                    status && status.label
-                  }
-                </TooltipContent>
-                <TooltipTrigger>
-                <Button
-                  size="lg"
-                  className="group/btn w-full sm:w-auto"
-                  onClick={handleBookAppointment}
-                  disabled={doctor.availabilityStatus === "fully_booked"}
-                >
-                  <CalendarPlus className="mr-2 h-5 w-5" />
-                  Book Appointment
-                </Button>
-                </TooltipTrigger>
-              </Tooltip>
+                {doctor.availabilityStatus === "fully_booked" ? (
+                  <Tooltip>
+                    <TooltipContent>{status && status.label}</TooltipContent>
+                    <TooltipTrigger>
+                      <Button
+                        size="lg"
+                        className="group/btn w-full sm:w-auto"
+                        onClick={handleBookAppointment}
+                        disabled={doctor.availabilityStatus === "fully_booked"}
+                      >
+                        <CalendarPlus className="mr-2 h-5 w-5" />
+                        Book Appointment
+                      </Button>
+                    </TooltipTrigger>
+                  </Tooltip>
+                ) : (
+                  <Button
+                    size="lg"
+                    className="group/btn w-full sm:w-auto"
+                    onClick={handleBookAppointment}
+                  ></Button>
+                )}
               </div>
             </div>
           </div>

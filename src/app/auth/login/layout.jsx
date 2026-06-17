@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Login | HealZen",
+  title: "Login | MediQueue",
   description: "Access your HealZen patient dashboard to manage appointments, messages, and digital medical history.",
 };
 

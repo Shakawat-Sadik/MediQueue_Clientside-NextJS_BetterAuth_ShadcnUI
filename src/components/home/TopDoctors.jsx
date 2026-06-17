@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { authClient } from "@/lib/auth-client";
-import { getDoctors } from "@/lib/action/action";
 
 const API_URL = process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_REMOTE_SERVER_URL : process.env.SERVER_URL || "http://localhost:5000";
 
@@ -30,7 +29,7 @@ const statusConfig = {
   },
 };
 
-export default function TopDoctors() {
+export default function TopDoctors({ res }) {
   const router = useRouter();
   const { data: session } = authClient.useSession();
   const user = session?.user;
@@ -43,22 +42,13 @@ export default function TopDoctors() {
     const fetchTopDoctors = async () => {
       try {
         setLoading(true);
-        const res = await getDoctors({
-          sort: "rating",
-          order: "desc",
-          limit: 3
-        });
-
-        // const data = await res.json();
+        
         if (!res.success) {
           throw new Error(res.message || "Failed to load doctors");
         }
         console.log("API Response for Top Doctors:", res);
-
-        // ✅ Check if backend says success
-
-        // ✅ Extract the actual array from data.resul
-        setDoctors(res.result || []);
+        
+        setDoctors(res.result);
       } catch (err) {
         setError(err.message);
         console.error("Error fetching top doctors:", err);
