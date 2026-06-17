@@ -69,6 +69,7 @@ export default function BookingForm({ doctor }) {
         toast.error("Booking failed", {
           description: result.message || "Please try again.",
         });
+        
       }
     } catch (err) {
       setError(err.message || "An unexpected error occurred.");

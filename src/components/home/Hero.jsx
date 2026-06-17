@@ -16,7 +16,7 @@ const slides = [
     description:
       "Long queues, delayed appointments, and weeks of uncertainty. The traditional system wasn't built for urgency — but we were.",
     primaryCTA: "Skip the Wait",
-    primaryLink: "/appointments",
+    primaryLink: "/doctors",
     secondaryCTA: "See How It Works",
     secondaryLink: "/#how-it-works",
     // Upload: patients sitting idly in a hospital waiting room / corridor
@@ -32,7 +32,7 @@ const slides = [
     description:
       "Browse verified specialists, choose your time, and connect directly. No queues, no referrals, no waiting weeks for an answer.",
     primaryCTA: "Book Appointment",
-    primaryLink: "/appointments",
+    primaryLink: "/doctors",
     secondaryCTA: "My Dashboard",
     secondaryLink: "/dashboard",
     // Upload: doctor consulting a patient one-on-one in a modern clinic
