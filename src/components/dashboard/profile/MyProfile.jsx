@@ -1,4 +1,6 @@
+import Loading from "@/app/loading";
 import MyProfile from "@/components/dashboard/MyProfile";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "My Profile | MediQueue",
@@ -6,5 +8,7 @@ export const metadata = {
 };
 
 export default function ProfilePage() {
-  return <MyProfile />;
+  return (<Suspense fallback={<Loading/>}>
+    <MyProfile />
+  </Suspense>)
 }

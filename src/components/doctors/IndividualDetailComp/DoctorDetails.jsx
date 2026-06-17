@@ -141,7 +141,10 @@ export default function DoctorDetails({ doctor }) {
                     size="lg"
                     className="group/btn w-full sm:w-auto"
                     onClick={handleBookAppointment}
-                  ></Button>
+                  >
+                    <CalendarPlus className="mr-2 h-5 w-5" />
+                    Book Appointment
+                  </Button>
                 )}
               </div>
             </div>
