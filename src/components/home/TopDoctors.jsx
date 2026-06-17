@@ -58,7 +58,7 @@ export default function TopDoctors({ res }) {
     };
 
     fetchTopDoctors();
-  }, []);
+  }, [res]);
 
   const handleViewDetails = (slug) => {
     if (user) {
