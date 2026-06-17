@@ -43,7 +43,7 @@ export default function NotFound() {
 
         {/* Description */}
         <p className="mx-auto mt-5 max-w-md text-center text-sm leading-relaxed text-muted-foreground">
-          The clinic, doctor profile, or page you're looking for doesn't
+          The clinic, doctor profile, or page you&apos;re looking for doesn&apos;t
           exist, may have been moved, or the URL might be incorrect.
         </p>
 
