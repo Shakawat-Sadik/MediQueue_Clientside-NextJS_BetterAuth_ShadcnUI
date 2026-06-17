@@ -8,16 +8,26 @@ const API_URL =
 // Helper: Core fetch wrapper
 // ─────────────────────────────────────
 async function fetchAPI(endpoint, options = {}) {
+  
+  const protectedEndpoints = ["/appointments", "/appointments/", "/reviews"];
+
+  const needsAuth = protectedEndpoints.some((route) =>
+    endpoint.startsWith(route),
+  );
+
   try {
     const res = await fetch(`${API_URL}${endpoint}`, {
       ...options,
-      cache: "no-store",
       headers: {
         "Content-Type": "application/json",
         ...options.headers,
       },
     });
-
+    
+    if(needsAuth) {
+      headers.authorization = "logged in";
+    };
+    
     const data = await res.json();
 
     if (!res.ok || !data.success) {
