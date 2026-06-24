@@ -6,17 +6,17 @@ import { HeartPulse, Mail, Phone, MapPin, Send } from "lucide-react";
 
 const quickLinks = [
   { name: "Home", href: "/" },
-  { name: "All Appointments", href: "/appointments" },
+  { name: "All Appointments", href: "/doctors" },
   { name: "Dashboard", href: "/dashboard" },
   { name: "Login", href: "/auth/login" },
 ];
 
 const specialties = [
-  { name: "Cardiology", href: "/appointments?specialty=Cardiologist" },
-  { name: "Neurology", href: "/appointments?specialty=Neurologist" },
-  { name: "Pediatrics", href: "/appointments?specialty=Pediatrician" },
-  { name: "Orthopedics", href: "/appointments?specialty=Orthopedic Surgeon" },
-  { name: "Ophthalmology", href: "/appointments?specialty=Ophthalmologist" },
+  { name: "Cardiology", href: "/doctors?specialty=Cardiologist" },
+  { name: "Neurology", href: "/doctors?specialty=Neurologist" },
+  { name: "Pediatrics", href: "/doctors?specialty=Pediatrician" },
+  { name: "Orthopedics", href: "/doctors?specialty=Orthopedic Surgeon" },
+  { name: "Ophthalmology", href: "/doctors?specialty=Ophthalmologist" },
 ];
 
 const socialLinks = [
