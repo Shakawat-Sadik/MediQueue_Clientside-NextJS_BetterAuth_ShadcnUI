@@ -36,5 +36,10 @@ export const auth = betterAuth({
     },
   },
 
+  trustedOrigins: [
+    "http://localhost:3000",
+    "https://mediqueue-clientside-nextjs-bettera.vercel.app" // ADD THIS LINE
+  ],
+
   plugins: [jwt()],
 });
