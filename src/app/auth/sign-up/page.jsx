@@ -42,7 +42,7 @@ export default function SignUpForm() {
       toast.error("Registration Failed", {
         description: `${error.message}` || eliteDateFormat(),
       });
-      console.log("Error Details:", {
+      console.warn("Error Details:", {
         message: error.message,
         name: error.name,
         stack: error.stack,
