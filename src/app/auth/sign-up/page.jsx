@@ -40,7 +40,7 @@ export default function SignUpForm() {
 
     if (error) {
       toast.error("Registration Failed", {
-        description: error.message || eliteDateFormat(),
+        description: `${error.message}: ${error.name} | ${error.stack}` || eliteDateFormat(),
       });
       setLoading(false);
     } else {
